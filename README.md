@@ -1,6 +1,6 @@
 PROJET D'APPRENTISSAGE DE SELENIUM AVEC JAVA
 
-OBJECTIF : \n
+OBJECTIF :
 -----Authentification-----
 • Accéder à la page de connexion.
 • Saisir un nom d’utilisateur valide et un mot de passe valide.
