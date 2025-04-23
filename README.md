@@ -10,7 +10,9 @@
 
 ### -----Gestion des employés-----
 - Accéder à la section PIM (Personnel Information Management).  
-- Ajouter un nouvel employé en remplissant le formulaire.  
+- Ajouter un nouvel employé en remplissant le formulaire.
+
+### -----Setup----- 
 
 
 
