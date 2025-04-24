@@ -12,7 +12,7 @@
 - Accéder à la section PIM (Personnel Information Management).  
 - Ajouter un nouvel employé en remplissant le formulaire.
 
-### -----Ce projet inclu 5 classes----- 
+### -----Ce projet inclut 5 classes----- 
 - La Auth (elle contient toutes les classes pour nos tests)
 - La Main
 - LoginPage (pour déclarer nos méthodes de connexions)
@@ -25,6 +25,11 @@
 - Test avec identifiants invalides
 - Création d'un employé
 - Acceder à la section info
+
+### -----Comment lancer le projet ?----- 
+- Cloner le projet
+- mvn compile
+- mvn test
 
 
 
