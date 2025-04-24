@@ -15,62 +15,37 @@ import java.time.Duration;
 public class Auth {
 
     WebDriver driver;
+    private LoginPage loginPage;
     Setup driverSetup = new Setup();
 
     @BeforeMethod
     public void setUp() {
         driver = driverSetup.SetupDriver();
+        loginPage = new LoginPage(driver);
     }
 
     @Test
     public void testAuthValid() {
-        driver.get(TextConstants.BASE_URL);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TextConstants.IMPLICIT_WAIT_SECONDS));
-
-        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(TextConstants.USERNAME);
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(TextConstants.PASSWORD);
-
-        WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
-        loginButton.click();
-
-        WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
-        Assert.assertTrue(dashboard.isDisplayed(), "Dashboard.");
-        Assert.assertEquals(dashboard.getText(), TextConstants.DASHBOARD_TEXT);
-
-        System.out.println(String.format(TextConstants.DASHBOARD_REDIRECT_MESSAGE, dashboard.getText()));
+        loginPage.loginWithValidCredentials();
+        Assert.assertTrue(loginPage.isDashboardDisplayed(), "Dashboard should be displayed after successful login");
+        System.out.println(String.format(TextConstants.DASHBOARD_REDIRECT_MESSAGE, TextConstants.DASHBOARD_TEXT));
     }
 
     @Test
     public void testAuthInValid() {
-        driver.get(TextConstants.BASE_URL);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TextConstants.IMPLICIT_WAIT_SECONDS));
-
-        driver.findElement(By.xpath("//input[@name='username']")).sendKeys(TextConstants.FALSE_USERNAME);
-        driver.findElement(By.xpath("//input[@name='password']")).sendKeys(TextConstants.FALSE_PASSWORD);
-
-        WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
-        loginButton.click();
-
-        try {
-            WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
-            Assert.assertFalse(dashboard.isDisplayed());
-        } catch (NoSuchElementException e) {
-            System.out.println(TextConstants.DASHBOARD_NOT_FOUND_MESSAGE);
-        }
-
-        WebElement errorMessage = driver.findElement(By.xpath("//div[@role='alert']"));
-        Assert.assertTrue(errorMessage.isDisplayed());
-        Assert.assertEquals(errorMessage.getText(), TextConstants.INVALID_CREDENTIALS_MESSAGE);
+        loginPage.loginWithInvalidCredentials();
+        Assert.assertFalse(loginPage.isDashboardDisplayed(), "Dashboard should not be displayed after failed login");
+        System.out.println(TextConstants.DASHBOARD_NOT_FOUND_MESSAGE);
+        Assert.assertEquals(loginPage.getErrorMessage(), TextConstants.INVALID_CREDENTIALS_MESSAGE);
     }
 
     @Test
     public void ajouterUnEmploye() throws InterruptedException {
-        driver.get(TextConstants.BASE_URL);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TextConstants.IMPLICIT_WAIT_SECONDS));
 
-        driver.findElement(By.cssSelector("input[name='username']")).sendKeys(TextConstants.USERNAME);
-        driver.findElement(By.cssSelector("input[name='password']")).sendKeys(TextConstants.PASSWORD);
-        driver.findElement(By.xpath("//button[normalize-space()='Login']")).click();
+        // faire appel à notre fonction Login
+        loginPage.loginWithValidCredentials();
 
         WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
         Assert.assertTrue(dashboard.isDisplayed(), "L'utilisateur n'est pas redirigé vers le tableau de bord.");
@@ -110,12 +85,11 @@ public class Auth {
 
     @Test
     public void voirlesInfo() throws InterruptedException {
-        driver.get(TextConstants.BASE_URL);
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(TextConstants.IMPLICIT_WAIT_SECONDS));
 
-        driver.findElement(By.cssSelector("input[name='username']")).sendKeys(TextConstants.USERNAME);
-        driver.findElement(By.cssSelector("input[name='password']")).sendKeys(TextConstants.PASSWORD);
-        driver.findElement(By.xpath("//button[normalize-space()='Login']")).click();
+        // faire appel à notre fonction Login
+        loginPage.loginWithValidCredentials();
 
         WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
         Assert.assertTrue(dashboard.isDisplayed(), "L'utilisateur n'est pas redirigé vers le tableau de bord.");
