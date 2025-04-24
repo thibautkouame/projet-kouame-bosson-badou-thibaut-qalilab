@@ -12,7 +12,7 @@ public class TextConstants {
     public static final String INVALID_CREDENTIALS_MESSAGE = "Identifiants incorrects";
     public static final String DASHBOARD_TEXT = "Dashboard";
 
-    // Textes des employés
+    // Identifiant de l'employé
     public static final String EMPLOYEE_FIRST_NAME = "Bosson Badou Thibaut";
     public static final String EMPLOYEE_LAST_NAME = "Kouame";
     public static final String EMPLOYEE_MIDDLE_NAME = "";
@@ -24,6 +24,7 @@ public class TextConstants {
     public static final String EMPLOYEE_ADDED_MESSAGE = "Le test à été effectué avec succès. Un nouvel employé a été ajouté";
     public static final String INFO_SECTION_FOUND_MESSAGE = "Le test à été effectué avec succès. La section info trouvée";
     public static final String EMPLLOYEE_ADDED_MESSAGE = "Le test à été effectué avec succès. Un nouvel employé a été ajouté";
+    
     // Délais
     public static final int IMPLICIT_WAIT_SECONDS = 5;
 }
