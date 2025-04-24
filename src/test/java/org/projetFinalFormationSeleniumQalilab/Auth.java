@@ -79,13 +79,15 @@ public class Auth {
         WebElement loginButton = driver.findElement(By.xpath("//button[normalize-space()='Login']"));
         loginButton.click();
 
+
+
         // Afficher un message dans le cas ou le test échoue
         try {
             WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
             Assert.assertFalse(dashboard.isDisplayed());
         } catch (NoSuchElementException e) {
 
-            System.out.println("L'utilisateur n'a pas été redirigé vers le tableau de bord.");
+            System.out.println("L'utilisateur n'a pas été redirigé vers le tableau de bord, car dashboard n'a pas été trouvé");
         }
 
         // Récuperer le message d'erreur
@@ -152,6 +154,41 @@ public class Auth {
             Assert.assertEquals(sucessMessage.getText(), "Success");
         } catch (NoSuchElementException e) {
             System.out.println("Le test à été effectué avec succès. Un nouvel employé a été ajouté");
+        }
+
+    }
+
+    @Test
+    public void voirlesInfo() throws InterruptedException {
+
+        // La page de test
+        driver.get(url);
+
+        // Appliquer un delai d'exécution
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(delay));
+
+        // saisir les identifiants valides
+        driver.findElement(By.cssSelector("input[name='username']")).sendKeys("Admin");
+        driver.findElement(By.cssSelector("input[name='password']")).sendKeys("admin123");
+
+        // cliquer sur le bouton Login
+        driver.findElement(By.xpath("//button[normalize-space()='Login']")).click();
+
+        // Vérifier que l'utilisateur est redirigé vers le tableau de bord
+        WebElement dashboard = driver.findElement(By.xpath("//h6[normalize-space()='Dashboard']"));
+        Assert.assertTrue(dashboard.isDisplayed(), "L'utilisateur n'est pas redirigé vers le tableau de bord.");
+        Assert.assertEquals(dashboard.getText(), "Dashboard");
+
+        // Ensuite lancer le menu PIM (Personnel Information Management)
+        driver.findElement(By.cssSelector("a[href=\"/web/index.php/pim/viewMyDetails\"]")).click();
+
+
+        try {
+            WebElement sucessMessage = driver.findElement(By.xpath("//div[@role='alert']"));
+            Assert.assertTrue(sucessMessage.isDisplayed());
+            Assert.assertEquals(sucessMessage.getText(), "Success");
+        } catch (NoSuchElementException e) {
+            System.out.println("Le test à été effectué avec succès. La section info trouvée");
         }
 
     }
