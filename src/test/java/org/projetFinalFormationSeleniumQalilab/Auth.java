@@ -27,14 +27,14 @@ public class Auth {
     @Test
     public void testAuthValid() {
         loginPage.loginWithValidCredentials();
-        Assert.assertTrue(loginPage.isDashboardDisplayed(), "Dashboard should be displayed after successful login");
+        Assert.assertTrue(loginPage.isDashboardDisplayed());
         System.out.println(String.format(TextConstants.DASHBOARD_REDIRECT_MESSAGE, TextConstants.DASHBOARD_TEXT));
     }
 
     @Test
     public void testAuthInValid() {
         loginPage.loginWithInvalidCredentials();
-        Assert.assertFalse(loginPage.isDashboardDisplayed(), "Dashboard should not be displayed after failed login");
+        Assert.assertFalse(loginPage.isDashboardDisplayed());
         System.out.println(TextConstants.DASHBOARD_NOT_FOUND_MESSAGE);
         Assert.assertEquals(loginPage.getErrorMessage(), TextConstants.INVALID_CREDENTIALS_MESSAGE);
     }
