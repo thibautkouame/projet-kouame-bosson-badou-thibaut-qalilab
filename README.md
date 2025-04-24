@@ -12,8 +12,11 @@
 - Accéder à la section PIM (Personnel Information Management).  
 - Ajouter un nouvel employé en remplissant le formulaire.
 
-### -----Setup----- 
--
+### -----La classe Auth----- 
+- Test avec identifiants valides
+- Test avec identifiants invalides
+- Création d'un employé
+- Acceder à la section info
 
 
 
