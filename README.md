@@ -12,11 +12,20 @@
 - Accéder à la section PIM (Personnel Information Management).  
 - Ajouter un nouvel employé en remplissant le formulaire.
 
+### -----Ce projet inclu 5 classes----- 
+- La Auth (elle contient toutes les classes pour nos tests)
+- La Main
+- LoginPage (pour déclarer nos méthodes de connexions)
+- Setup (pour la confiuration de notre environnement chrome )
+- TextConstants (des textes utils au sein du projet)
+
+
 ### -----La classe Auth----- 
 - Test avec identifiants valides
 - Test avec identifiants invalides
 - Création d'un employé
 - Acceder à la section info
+
 
 
 
