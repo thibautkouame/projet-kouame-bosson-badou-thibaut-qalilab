@@ -13,7 +13,7 @@ public class LoginPage {
     private final WebDriver driver;
     private final WebDriverWait wait;
 
-    // Locators
+    // Localisation des classes
     private final By usernameField = By.xpath("//input[@name='username']");
     private final By passwordField = By.xpath("//input[@name='password']");
     private final By loginButton = By.xpath("//button[normalize-space()='Login']");
@@ -24,7 +24,7 @@ public class LoginPage {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(TextConstants.IMPLICIT_WAIT_SECONDS));
     }
-
+    
     public void navigateToLoginPage() {
         driver.get(TextConstants.BASE_URL);
     }
